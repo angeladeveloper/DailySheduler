@@ -8,9 +8,6 @@ const hourBlockElement = document.querySelector('.hourBlocks')
 // const moment = require("../lib/moment.js/moment")
 
 
-const KEY_HOUR_TASKS = 'task.hour';
-
-// let hourTasks = JSON.parse(localStorage.getItem(KEY_HOUR_TASKS) || '')
 
 
 let hourArray = [ // not entire array yet. 
@@ -37,16 +34,16 @@ let hourArray = [ // not entire array yet.
 ]
 let currentIndex =0;
 let dayStartHour = 5;
-let m = moment()
+let m = moment().hour()
  // current time
-let startOfDay = moment().startOf('day') // start of current day
-let hourBlock = moment(startOfDay).add(5, "hours").format("hh:mm");
+// let startOfDay = moment().startOf('day') // start of current day
+// let hourBlock = moment(startOfDay).add(5, "hours").format("hh:mm");
 
 
 
-console.log('time of Day', startOfDay);
-console.log(startOfDay.toString());
-console.log('hour block', hourBlock);
+// console.log('time of Day', startOfDay);
+// console.log(startOfDay.toString());
+// console.log('hour block', hourBlock);
 
 
 
@@ -92,21 +89,83 @@ function setEachHourBlock(){
     saveElement.innerText = "Save"
     spanElement.appendChild(saveElement);
 
-    let currentMoment = moment().set("hours", currentIndex+dayStartHour)
+    let currentMoment = moment().set("hours", currentIndex+dayStartHour).hour();
   console.log(hourArray[currentIndex].time);
-  console.log("current",m);
-  console.log("hour", currentMoment);
+  console.log("actualTime",m);
+  console.log("SetHour", currentMoment);
     if(m > currentMoment){
       inputElement.dataset.tense = "past"
      inputElement.style.backgroundColor = "red" 
+    }else if(m < currentMoment){
+      inputElement.dataset.tense = "future"
+      inputElement.style.backgroundColor = "green" 
+    }else{
+      inputElement.dataset.tense = "current"
+      inputElement.style.backgroundColor = "none" 
     }
 
-    // parseArrayTime();
+    saveElement.dataset.hourID = currentMoment;
+    inputElement.dataset.hourID = currentMoment;
+
     currentIndex++;
-
     }
 
-  )};
+ 
+  )
+  hourList.addEventListener('click', e => {
+    e.preventDefault();
+    const inputElement = document.querySelector('.form-control');
+    const taskName = inputElement.value;
+    console.log('Value:', taskName);
+    
+    if (e.target.tagName.toLowerCase() === 'button'){
+      selectedButton = e.target.dataset.hourID;
+      console.log("Selected BTN:",selectedButton);
+    
+      
+  }})
+};
+  setEachHourBlock()
+
+
+function saveTask(e){
+  if (e.target.tagName.toLowerCase() === 'button'){
+    selectedButton = e.target.dataset.listId;
+    console.log(selectedButton);
+// get the object with matching IdleDeadline
+let taskInput = document.querySelector('.form-control').value
+hourArray[1].task = taskInput
+  }
+
+  // let taskInput = document.querySelector('.form-control').value
+  console.log("user Value", taskInput);
+  
+  
+}
+
+function changeDesc( time, task ) {
+  for (var i in hourArray) {
+    if (hourArray[i].time == time) {
+      hourArray[i].task = task;
+       break; //Stop this loop, we found it!
+    }
+  }
+}
+
+
+changeDesc(0500, "go to sleep");
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -116,7 +175,10 @@ function setEachHourBlock(){
 // }
 
 
-setEachHourBlock();
+
+// const KEY_HOUR_TASKS = 'task.hour';
+
+// let hourTasks = JSON.parse(localStorage.getItem(KEY_HOUR_TASKS) || '')
 
 
 
