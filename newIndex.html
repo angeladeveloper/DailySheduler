@@ -18,7 +18,7 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/assests/style.css" />
     <title>Work Day Scheduler</title>
   </head>
 
@@ -28,37 +28,27 @@
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
     </header>
-    <div id="hourList" class="container">
+    <div class="container">
       <!-- Timeblocks go here -->
-      <div class="input-group">
-        <span class="input-group-text">12:00-1:00</span>
-        <input type="text" aria-label="First name" class="form-control" />
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Priority</option>
-          <option value="1">Low</option>
-          <option value="2" selected>Normal</option>
-          <option value="3">High</option>
-        </select>
-        <button type="button" class="btn btn-success">Save</button>
-      </div>
-    </div>
+      <ul id="hourList">
+       
 
     <template id="hourTemplate">
-      <div class="input-group template">
-        <span id="hourBlock" class="input-group-text">12:00-1:00</span>
+      <div class="input-group template col">
+        <span id="hourBlock" class="input-group-text">10:00-11:00</span>
         <input
           id="task"
           type="text"
           aria-label="First name"
           class="form-control"
         />
-        <!-- <select class="form-select" aria-label="Default select example">
-          <option selected>Priority</option>
-          <option value="1">Low</option>
-          <option value="2" selected>Normal</option>
-          <option value="3">High</option>
-        </select> -->
-        <button type="button" class="btn btn-success">Save</button>
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          id="button-addon2"
+        >
+          Button
+        </button>
       </div>
     </template>
     <script src="/lib/moment.js/moment.js"></script>
@@ -67,3 +57,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   </body>
 </html>
+<!-- <select class="form-select" aria-label="Default select example">
+          <option selected>Priority</option>
+          <option value="1">Low</option>
+          <option value="2" selected>Normal</option>
+          <option value="3">High</option>
+        </select> -->
