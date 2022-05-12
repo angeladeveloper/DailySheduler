@@ -5,12 +5,7 @@ const hourTemplate = document.getElementById('hourTemplate')
 const hourList = document.getElementById('hourList')
 const clockEl = document.querySelector('#currentDay')
 const hourBlockElement = document.querySelector('.hourBlocks')
-// const moment = require("../lib/moment.js/moment")
-
-
-
-
-let hourArray = [ // not entire array yet. 
+let hourArray = [ 
   {
     name: '5 AM',
     time: '0500',
@@ -29,23 +24,101 @@ let hourArray = [ // not entire array yet.
     time: '0700',
     task: '',
     priority: ['low', 'normal', 'high']
-  }
-
+  },
+  {
+      name: '8 AM',
+      time: '0800',
+      priority: ['low', 'normal', 'high']
+    }
+    ,
+    {
+      name: '9 AM',
+      time: '0900',    task: '',
+      priority: ['low', 'normal', 'high']
+    }
+    ,
+    {
+      name: '10 AM',
+      time: "1000",    task: '',
+      priority: ['low', 'normal', 'high']
+    }
+    ,
+    {
+      name: '11 AM',
+      time: "1100",     task: '',
+      priority: ['low', 'normal', 'high']
+    }
+    ,
+    {
+      name: '12 AM',
+      time: "1200",
+      priority: ['low', 'normal', 'high']
+    }
+    ,
+    {
+      name: '1 PM',
+      time: "0100",    task: '',
+      priority: ['low', 'normal', 'high']
+    }
+    ,
+    {
+      name: '2 PM',
+      time: "0200",    task: '',
+      priority: ['low', 'normal', 'high']
+    }
+    ,
+    {
+      name: '3 PM',
+      time: "0300",    task: '',
+      priority: ['low', 'normal', 'high']
+    }
+    ,
+    {
+      name: '4 PM',
+      time: "0400",    task: '',
+      priority: ['low', 'normal', 'high']
+    }
+    ,
+    {
+      name: '5 PM',
+      time: "0500",    task: '',
+      priority: ['low', 'normal', 'high']
+    }
+    ,
+    {
+      name: '6 PM',
+      time: "0600",    task: '',
+      priority: ['low', 'normal', 'high']
+    }
+    ,
+    {
+      name: '7 PM',
+      time: "0700",    task: '',
+      priority: ['low', 'normal', 'high']
+    }
+    ,
+    {
+      name: '8 PM',
+      time: "0800",    task: '',
+      priority: ['low', 'normal', 'high']
+    }
+    ,
+    {
+      name: '9 PM',
+      time: "0900",    task: '',
+      priority: ['low', 'normal', 'high']
+    }
+    ,
+    {
+      name: '10 PM',
+      time: "1000",    task: '',
+      priority: ['low', 'normal', 'high']
+    }
 ]
 let currentIndex =0;
 let dayStartHour = 5;
 let m = moment().hour()
- // current time
-// let startOfDay = moment().startOf('day') // start of current day
-// let hourBlock = moment(startOfDay).add(5, "hours").format("hh:mm");
-
-
-
-// console.log('time of Day', startOfDay);
-// console.log(startOfDay.toString());
-// console.log('hour block', hourBlock);
-
-
+// let inputElement = $("#hourList, input")
 
 function clock() {
   myInterval = setInterval(m => {
@@ -67,27 +140,27 @@ function setEachHourBlock(){
     hourList.appendChild(listElement);
 
     const divElement = document.createElement('div')
-    divElement.classList.add("input-group", "template", "col");
-    listElement.appendChild(divElement);
+    divElement.classList.add("input-group", "template");
+    hourList.appendChild(divElement);
 
     const spanElement = document.createElement('span');
-    spanElement.classList.add("input-group-text");
+    spanElement.classList.add("input-group-text",  "col");
     spanElement.innerText = hourArray[currentIndex].time;
     divElement.appendChild(spanElement)
     // console.log(hourArray[currentIndex].time);
 
-    const inputElement = document.createElement('input');
-    inputElement.classList.add("form-control");
+    inputElement = document.createElement('input');
+    inputElement.classList.add("form-control" , "col-6");
     inputElement.setAttribute("type", "text");
     inputElement.dataset.tense = "current";
-    spanElement.appendChild(inputElement);
+    divElement.appendChild(inputElement);
 
     const saveElement = document.createElement('button');
-    saveElement.classList.add("btn", "btn-outline-secondary");
+    saveElement.classList.add("btn", "btn-outline-secondary", "col");
     saveElement.setAttribute("type", "button");
     // saveElement.setAttribute("id", "button-addon2");
     saveElement.innerText = "Save"
-    spanElement.appendChild(saveElement);
+    divElement.appendChild(saveElement);
 
     let currentMoment = moment().set("hours", currentIndex+dayStartHour).hour();
   console.log(hourArray[currentIndex].time);
@@ -112,36 +185,25 @@ function setEachHourBlock(){
 
  
   )
-  hourList.addEventListener('click', e => {
-    e.preventDefault();
-    const inputElement = document.querySelector('.form-control');
-    const taskName = inputElement.value;
-    console.log('Value:', taskName);
+
+
+  // hourList.addEventListener('click', e => {
+  //   e.preventDefault();
+  //   const inputElement = document.querySelector('input', e.target.dataset.hourID );
+  //   const taskName = inputElement.value;
+  //   console.log('Value:', taskName);
+  //   console.log(inputElement);
     
-    if (e.target.tagName.toLowerCase() === 'button'){
-      selectedButton = e.target.dataset.hourID;
-      console.log("Selected BTN:",selectedButton);
+  //   if (e.target.tagName.toLowerCase() === 'button'){
+  //     selectedButton = e.target.dataset.hourID;
+  //     console.log("Selected BTN:",selectedButton);
+         
+  //   }
     
-      
-  }})
+// })
 };
   setEachHourBlock()
 
-
-function saveTask(e){
-  if (e.target.tagName.toLowerCase() === 'button'){
-    selectedButton = e.target.dataset.listId;
-    console.log(selectedButton);
-// get the object with matching IdleDeadline
-let taskInput = document.querySelector('.form-control').value
-hourArray[1].task = taskInput
-  }
-
-  // let taskInput = document.querySelector('.form-control').value
-  console.log("user Value", taskInput);
-  
-  
-}
 
 function changeDesc( time, task ) {
   for (var i in hourArray) {
